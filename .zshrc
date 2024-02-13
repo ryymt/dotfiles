@@ -74,7 +74,7 @@ chpwd() {
 export LSCOLORS=cxfxcxdxbxegedabagacad
 
 # pdf 圧縮
-function _pdfmin()
+function pdfmin()
 {
     local cnt=0
     for i in $@; do
