@@ -23,3 +23,9 @@
 	prune = true
 [pull]
 	rebase = false
+	ff = only
+[user]
+	name = Ryu Yamamoto
+	email = ryusun150000000@gmail.com
+[merge]
+	ff = false

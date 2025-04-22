@@ -54,6 +54,9 @@ setopt globdots
 
 # alias ---------
 
+#Boxパス
+alias boxbkup/='/Users/Ryu/Library/CloudStorage/Box-Box/CMA-制作部/バックアップ'
+
 # 接尾辞エイリアス 拡張子と起動アプリケーションを紐付け
 alias -s pdf=xpdf
 
