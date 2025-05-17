@@ -2,7 +2,6 @@
 export PATH=~/bin:$PATH
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
-export PATH="/opt/homebrew/bin:$PATH"
 
 # 補完
 autoload -Uz compinit
@@ -91,3 +90,6 @@ function pdfmin()
 
 # sheldon
 eval "$(sheldon source)"
+
+# zoxide
+eval "$(zoxide init zsh)"
