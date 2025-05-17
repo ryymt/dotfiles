@@ -2,6 +2,7 @@
 export PATH=~/bin:$PATH
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
+export PATH="/opt/homebrew/bin:$PATH"
 
 # 補完
 autoload -Uz compinit
@@ -53,9 +54,6 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 setopt globdots
 
 # alias ---------
-
-#Boxパス
-alias boxbkup/='/Users/Ryu/Library/CloudStorage/Box-Box/CMA-制作部/バックアップ'
 
 # 接尾辞エイリアス 拡張子と起動アプリケーションを紐付け
 alias -s pdf=xpdf
