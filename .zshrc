@@ -2,6 +2,8 @@
 export PATH=~/bin:$PATH
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
+# export PATH=/usr/local/bin/git:$PATH
+# export PATH="/opt/homebrew/bin/rsync:$PATH"
 
 # 補完
 autoload -Uz compinit
@@ -54,6 +56,12 @@ setopt globdots
 
 # alias ---------
 
+#　よく使う階層
+alias boxbkup='cd ~/Library/CloudStorage/Box-Box/CMA-制作部/バックアップ'
+
+# 年月日時分秒フォルダを作成
+alias mkdtfolder='mkdir "$(date '+%Y-%m-%d-%H-%M-%S')"'
+
 # 接尾辞エイリアス 拡張子と起動アプリケーションを紐付け
 alias -s pdf=xpdf
 
@@ -61,7 +69,18 @@ alias -s pdf=xpdf
 alias ls='ls -AGF'
 
 # zmv
-alias zmv='noglob zmv -W'
+# alias zmv='noglob zmv -W'
+
+# git関連
+# リリース用のGitタグを作成してプッシュする
+function git-release() {
+    if [ -z "$1" ]; then
+        echo "使用法: git-release <ブランチ名>"
+        return 1
+    fi
+    tname="release-$1"
+    git tag "$tname" && git push origin "$tname"
+}
 
 # cdの後にlsを実行
 chpwd() {
@@ -69,6 +88,10 @@ chpwd() {
    ls
  fi
 }
+# colordiff
+if [[ -x `which colordiff` ]]; then
+  alias diff='colordiff'
+fi
 
 #ls色設定
 export LSCOLORS=cxfxcxdxbxegedabagacad
@@ -93,3 +116,15 @@ eval "$(sheldon source)"
 
 # zoxide
 eval "$(zoxide init zsh)"
+
+# bun completions
+[ -s "/Users/Ryu/.bun/_bun" ] && source "/Users/Ryu/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(/Users/Ryu/.docker/completions $fpath)
+autoload -Uz compinit
+compinit
+# End of Docker CLI completions

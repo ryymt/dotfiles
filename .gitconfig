@@ -29,3 +29,10 @@
 	email = ryusun150000000@gmail.com
 [merge]
 	ff = false
+[color]
+	ui = true
+[diff "minjs"]
+	textconv = js-beautify
+	cachetextconv = true
+[push]
+	default = current
