@@ -57,7 +57,9 @@ setopt globdots
 # alias ---------
 
 #　よく使う階層
-alias boxbkup='cd ~/Library/CloudStorage/Box-Box/CMA-制作部/バックアップ'
+alias boxbkup='~/Library/CloudStorage/Box-Box/CMA-制作部/バックアップ'
+alias prj='~/Project'
+alias dwn='~/Downloads'
 
 # 年月日時分秒フォルダを作成
 alias mkdtfolder='mkdir "$(date '+%Y-%m-%d-%H-%M-%S')"'
