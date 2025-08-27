@@ -111,6 +111,54 @@ function pdfmin()
     wait && return 0
 }
 
+# z
+. `brew --prefix`/etc/profile.d/z.sh
+
+# fzf prompt
+function fzf-select-history() {
+    BUFFER=$(history -n -r 1 | fzf --query "$LBUFFER" --reverse)
+    CURSOR=$#BUFFER
+    zle reset-prompt
+}
+zle -N fzf-select-history
+bindkey '^r' fzf-select-history
+
+# fzf git branch
+export FZF_DEFAULT_OPTS="--reverse --no-sort --no-hscroll --preview-window=down"
+
+user_name=$(git config user.name)
+fmt="\
+%(if:equals=$user_name)%(authorname)%(then)%(color:default)%(else)%(color:brightred)%(end)%(refname:short)|\
+%(committerdate:relative)|\
+%(subject)"
+function select-git-branch-friendly() {
+  selected_branch=$(
+    git branch --sort=-committerdate --format=$fmt --color=always \
+    | column -ts'|' \
+    | fzf --ansi --exact --preview='git log --oneline --graph --decorate --color=always -50 {+1}' \
+    | awk '{print $1}' \
+  )
+  BUFFER="${LBUFFER}${selected_branch}${RBUFFER}"
+  CURSOR=$#LBUFFER+$#selected_branch
+  zle redisplay
+}
+zle -N select-git-branch-friendly
+bindkey '^b' select-git-branch-friendly
+
+# fzf z ディレクトリ
+function fzf-cdr() {
+    local selected_dir=$(z -tl | cut -c 12- | fzf --prompt="Dir> " --tac)
+    if [ -n "$selected_dir" ]; then
+        BUFFER="cd ${selected_dir}"
+        zle accept-line
+        zle clear-screen
+     else
+        zle redisplay
+    fi
+}
+zle -N fzf-cdr
+bindkey '^g^f' fzf-cdr
+
 # sheldon
 eval "$(sheldon source)"
 

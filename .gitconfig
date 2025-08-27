@@ -36,3 +36,5 @@
 	cachetextconv = true
 [push]
 	default = current
+[ghq]
+	root = ~/Projects
