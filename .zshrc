@@ -83,6 +83,32 @@ function git-release() {
     tname="release-$1"
     git tag "$tname" && git push origin "$tname"
 }
+# ブランチ削除関数
+function git-branch-delete() {
+  local branch="$1"
+
+  if [[ -z "$branch" ]]; then
+    echo "Usage: git-branch-delete <branch-name>"
+    return 1
+  fi
+
+  # 確認プロンプト
+  echo "⚠️ 本当にブランチ '${branch}' をローカル・リモート両方から削除しますか？ (y/n)"
+  read -r ans
+  case "$ans" in
+    y|Y )
+      # ローカル削除
+      git branch -d "$branch" 2>/dev/null || git branch -D "$branch"
+
+      # リモート削除
+      git push origin --delete "$branch"
+      echo "ゴミ箱 ブランチ '${branch}' を削除しました。"
+      ;;
+    * )
+      echo "キャンセルしました。"
+      ;;
+  esac
+}
 
 # cdの後にlsを実行
 chpwd() {
