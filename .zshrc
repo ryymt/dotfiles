@@ -70,12 +70,14 @@ alias -s pdf=xpdf
 # ls
 alias ls='ls -AGF'
 
+alias rm='trash -F'
+
 # zmv
 # alias zmv='noglob zmv -W'
 
 # git関連
 # リリース用のGitタグを作成してプッシュする
-function git-release() {
+git-release() {
     if [ -z "$1" ]; then
         echo "使用法: git-release <ブランチ名>"
         return 1
@@ -84,7 +86,7 @@ function git-release() {
     git tag "$tname" && git push origin "$tname"
 }
 # ブランチ削除関数
-function git-branch-delete() {
+git-branch-delete() {
   local branch="$1"
 
   if [[ -z "$branch" ]]; then
@@ -125,7 +127,7 @@ fi
 export LSCOLORS=cxfxcxdxbxegedabagacad
 
 # pdf 圧縮
-function pdfmin()
+pdfmin()
 {
     local cnt=0
     for i in $@; do
@@ -143,7 +145,7 @@ function pdfmin()
 . `brew --prefix`/etc/profile.d/z.sh
 
 # fzf prompt
-function fzf-select-history() {
+fzf-select-history() {
     BUFFER=$(history -n -r 1 | fzf --query "$LBUFFER" --reverse)
     CURSOR=$#BUFFER
     zle reset-prompt
@@ -159,7 +161,7 @@ fmt="\
 %(if:equals=$user_name)%(authorname)%(then)%(color:default)%(else)%(color:brightred)%(end)%(refname:short)|\
 %(committerdate:relative)|\
 %(subject)"
-function select-git-branch-friendly() {
+select-git-branch-friendly() {
   selected_branch=$(
     git branch --sort=-committerdate --format=$fmt --color=always \
     | column -ts'|' \
@@ -174,7 +176,7 @@ zle -N select-git-branch-friendly
 bindkey '^b' select-git-branch-friendly
 
 # fzf z ディレクトリ
-function fzf-cdr() {
+fzf-cdr() {
     local selected_dir=$(z -tl | cut -c 12- | fzf --prompt="Dir> " --tac)
     if [ -n "$selected_dir" ]; then
         BUFFER="cd ${selected_dir}"
