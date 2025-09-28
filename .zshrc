@@ -1,5 +1,6 @@
 # パス設定
 export PATH=~/bin:$PATH
+export PATH=~/Project/backup-bat-shell/bin:$PATH
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
 # export PATH=/usr/local/bin/git:$PATH
@@ -69,8 +70,6 @@ alias -s pdf=xpdf
 
 # ls
 alias ls='ls -AGF'
-
-alias rm='trash -F'
 
 # zmv
 # alias zmv='noglob zmv -W'
