@@ -139,7 +139,12 @@ pdfmin()
     done
     wait && return 0
 }
-
+# touchの時にディレクトリも作る
+touchp() {
+  for file in "$@"; do
+    mkdir -p "$(dirname "$file")" && touch "$file"
+  done
+}
 # z
 . `brew --prefix`/etc/profile.d/z.sh
 
@@ -173,6 +178,21 @@ select-git-branch-friendly() {
 }
 zle -N select-git-branch-friendly
 bindkey '^b' select-git-branch-friendly
+
+# fzf git select commit
+gcf() {
+  git log --oneline --decorate \
+    | fzf --no-sort --reverse \
+          --preview 'git show --color=always {1}' \
+          --preview-window=right:60% \
+    | awk '{print $1}'
+}
+# 複数選択
+gcfm() {
+  git log --oneline \
+    | fzf --multi --no-sort --reverse \
+    | awk '{print $1}'
+}
 
 # fzf z ディレクトリ
 fzf-cdr() {
