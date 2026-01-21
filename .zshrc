@@ -81,8 +81,36 @@ git-release() {
         echo "使用法: git-release <ブランチ名>"
         return 1
     fi
-    tname="release-$1"
-    git tag "$tname" && git push origin "$tname"
+
+    branch="$1"
+    tag="release-$1"
+
+    # 現在のブランチチェック
+    current_branch=$(git branch --show-current)
+    if [ "$current_branch" = "$branch" ]; then
+        echo "現在チェックアウト中のブランチは削除できません: $branch"
+        return 1
+    fi
+
+    # タグ作成 & push
+    git tag "$tag" || return 1
+    git push origin "$tag" || return 1
+
+    # ローカルブランチ削除
+    if git show-ref --verify --quiet "refs/heads/$branch"; then
+        git branch -d "$branch"
+    else
+        echo "ローカルブランチは存在しません: $branch"
+    fi
+
+    # リモートブランチ削除
+    if git ls-remote --exit-code --heads origin "$branch" > /dev/null 2>&1; then
+        git push origin --delete "$branch"
+    else
+        echo "リモートブランチは存在しません: $branch"
+    fi
+
+    echo "✔ release完了: tag=$tag, branch=$branch 削除済み"
 }
 # ブランチ削除関数
 git-branch-delete() {
@@ -191,6 +219,8 @@ gcf() {
 gcfm() {
   git log --oneline \
     | fzf --multi --no-sort --reverse \
+          --preview 'git show --color=always {1}' \
+          --preview-window=right:60% \
     | awk '{print $1}'
 }
 
