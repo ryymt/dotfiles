@@ -38,3 +38,5 @@
 	default = current
 [ghq]
 	root = ~/Projects
+[credential]
+	helper = osxkeychain

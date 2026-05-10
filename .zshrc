@@ -71,6 +71,9 @@ alias -s pdf=xpdf
 # ls
 alias ls='ls -AGF'
 
+# zshやbashの設定ファイル（~/.zshrcなど）に追記
+alias ??='gh copilot suggest'
+
 # zmv
 # alias zmv='noglob zmv -W'
 
