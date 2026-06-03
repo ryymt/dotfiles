@@ -86,6 +86,11 @@ git-release() {
     fi
 
     branch="$1"
+  if [[ "$branch" != ttms* ]]; then
+    echo "リリースできないブランチです。"
+    return 1
+  fi
+
     tag="release-$1"
 
     # 現在のブランチチェック
