@@ -9,6 +9,7 @@
 	excludesfile = /Users/Ryu/.gitignore_global
 	autocrlf = false
 	filemode = false
+	hooksPath = /Users/Ryu/.config/git/hooks
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path =
@@ -40,3 +41,5 @@
 	root = ~/Projects
 [credential]
 	helper = osxkeychain
+[url "git@github.com:"]
+	insteadOf = https://github.com/

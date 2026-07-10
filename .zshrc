@@ -3,8 +3,12 @@ export PATH=~/bin:$PATH
 export PATH=~/Project/backup-bat-shell/bin:$PATH
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
+export PATH="$HOME/.docker/bin:$PATH"
 # export PATH=/usr/local/bin/git:$PATH
 # export PATH="/opt/homebrew/bin/rsync:$PATH"
+
+# '/' を単語の境界として認める
+typeset -g WORDCHARS=${WORDCHARS:s@/@}
 
 # 補完
 autoload -Uz compinit
