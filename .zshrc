@@ -10,6 +10,9 @@ export PATH="$HOME/.docker/bin:$PATH"
 # '/' を単語の境界として認める
 typeset -g WORDCHARS=${WORDCHARS:s@/@}
 
+# Backspace（Ctrl+h）を押したときに、スラッシュ単位で1単語削除する
+bindkey '^H' backward-kill-word
+
 # 補完
 autoload -Uz compinit
 compinit
