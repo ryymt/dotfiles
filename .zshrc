@@ -76,7 +76,7 @@ alias mkdtfolder='mkdir "$(date '+%Y-%m-%d-%H-%M-%S')"'
 alias -s pdf=xpdf
 
 # ls
-alias ls='ls -AGF'
+alias ls='ls -AGFD "%Y-%m-%d %H:%M:%S"'
 
 # GitHub Copilot CLIのエイリアス設定
 alias ghcs='gh copilot suggest'
