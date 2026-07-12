@@ -81,6 +81,9 @@ alias ls='ls -AGFD "%Y-%m-%d %H:%M:%S"'
 # GitHub Copilot CLIのエイリアス設定
 alias ghcs='gh copilot suggest'
 
+# 3以上のファイル削除と-rの時に確認
+alias rm='rm -I'
+
 # zmv
 # alias zmv='noglob zmv -W'
 
